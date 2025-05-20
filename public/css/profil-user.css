@@ -1,0 +1,24 @@
+body {
+    background-color: #f0f2f5;
+  }
+  
+  .profile-card {
+    max-width: 600px;
+    margin: 50px auto;
+    border-radius: 15px;
+  }
+  
+  .profile-card h4 {
+    margin-bottom: 0;
+  }
+  
+  .profile-info th {
+    width: 40%;
+  }
+  
+  .btn-group-custom {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
