@@ -174,7 +174,7 @@
           </div>
           <!-- Ruangan 8 -->
           <div class="ruangan-item">
-            <img src="/img/lab jaringan.jpg" alt="Ruangan 8" />
+            <img src="/img/lab_jaringan.jpg" alt="Ruangan 8" />
             <h3>Lab Jaringan (D10.370B)</h3>
             <p>Ruang untuk praktik konfigurasi dan pengelolaan jaringan komputer dengan perangkat keras dan software pendukung.</p>
           </div>
