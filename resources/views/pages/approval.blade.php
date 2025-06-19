@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Approval Peminjaman - Admin</title>
+  <title>Persetujuan Peminjaman - Admin</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
   <style>
     .request-card { transition: 0.3s; margin-bottom: 20px; border-left: 4px solid #dee2e6; }
     .request-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
@@ -37,7 +38,7 @@
             <a class="nav-link" href="{{ url('admin-dashboard') }}"><i class="fas fa-tachometer-alt me-1"></i> Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="{{ url('approval') }}"><i class="fas fa-clipboard-check me-1"></i> Approval</a>
+            <a class="nav-link active" href="{{ url('approval') }}"><i class="fas fa-clipboard-check me-1"></i> Persetujuan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('ruangan-admin') }}"><i class="fas fa-door-open me-1"></i> Ruangan</a>
@@ -62,7 +63,7 @@
     </div>
   </nav>
   <div class="container mb-5">
-    <h2 class="mb-4"><i class="fas fa-clipboard-check me-2"></i>Approval Peminjaman Ruangan</h2>
+    <h2 class="mb-4"><i class="fas fa-clipboard-check me-2"></i>Persetujuan Peminjaman Ruangan</h2>
     @if(session('success'))
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
@@ -143,7 +144,20 @@
             </div>
             <ul class="list-unstyled mb-0 mt-2">
               <li><strong>Ruangan:</strong> {{ $row->id_ruangan }}</li>
-              <li><strong>Tanggal & Waktu:</strong> {{ $row->tanggal_peminjaman }} <small>{{ $row->waktu_peminjaman }}</small></li>
+              <li><strong>Tanggal:</strong> 
+                @if($row->tanggal_mulai && $row->tanggal_selesai)
+                  {{ \Carbon\Carbon::parse($row->tanggal_mulai)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($row->tanggal_selesai)->format('d-m-Y') }}
+                @else
+                  -
+                @endif
+              </li>
+              <li><strong>Waktu:</strong> 
+                @if($row->waktu_mulai && $row->waktu_selesai)
+                  {{ \Carbon\Carbon::createFromFormat('H:i:s', $row->waktu_mulai)->format('h:i A') }} - {{ \Carbon\Carbon::createFromFormat('H:i:s', $row->waktu_selesai)->format('h:i A') }}
+                @else
+                  -
+                @endif
+              </li>
               <li><strong>Nama Peminjam:</strong> {{ $row->nama_peminjam }}</li>
               <li><strong>NIM:</strong> {{ $row->nim }}</li>
               <li><strong>Organisasi:</strong> {{ $row->organisasi }}</li>

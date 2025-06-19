@@ -5,6 +5,7 @@
   <title>Profil Pengguna</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
   <style>
       .alert-custom {
       border: 1px solid #dc3545;
@@ -54,27 +55,37 @@
       Profil Pengguna
     </div>
     <div class="card-body">
-      <table class="table table-bordered">
-        <tr>
-          <th>NIM</th>
-          <td>{{ $user->nim ?? '' }}</td>
-        </tr>
-        <tr>
-          <th>Nama</th>
-          <td>{{ $user->nama_user ?? '' }}</td>
-        </tr>
-        <tr>
-          <th>Email</th>
-          <td>{{ $user->email_user ?? '' }}</td>
-        </tr>
-        <tr>
-          <th>No Telepon</th>
-          <td>{{ $user->no_telepon ?? '' }}</td>
-        </tr>
-      </table>
+      <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start gap-4">
+        <div class="text-center text-md-start">
+          <img src="{{ $user->foto_user ? asset('uploads/foto-profil/'.$user->foto_user) : asset('img/default-avatar.png') }}" alt="Foto Profil" class="rounded-circle" style="width: 240px; height: 240px; object-fit: cover; border: 2px solid #ccc;">
+        </div>
+        <div class="flex-fill">
+          <table class="table table-bordered mb-0">
+            <tr>
+              <th>NIM</th>
+              <td>{{ $user->nim ?? '' }}</td>
+            </tr>
+            <tr>
+              <th>Nama</th>
+              <td>{{ $user->nama_user ?? '' }}</td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td>{{ $user->email_user ?? '' }}</td>
+            </tr>
+            <tr>
+              <th>No Telepon</th>
+              <td>{{ $user->no_telepon ?? '' }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
     <!-- Tombol Ubah Password (modal)-->
-    <div class="text-center mb-4">
+    <div class="text-center mb-4 d-flex flex-column flex-md-row justify-content-center gap-2">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfilModal">
+        <i class="fas fa-edit me-1"></i> Edit Data Diri
+      </button>
       <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ubahPasswordModal">
         <i class="fas fa-key me-1"></i> Ubah Password
       </button>
@@ -135,8 +146,20 @@
                   <td>{{ $data->nama_kegiatan }}</td>
                   <td>{{ $data->organisasi }}</td>
                   <td>{{ $data->nama_ruangan }} ({{ $data->id_ruangan }})</td>
-                  <td>{{ \Carbon\Carbon::parse($data->tanggal_peminjaman)->format('d-m-Y') }}</td>
-                  <td>{{ $data->waktu_peminjaman }}</td>
+                  <td>
+                    @if($data->tanggal_mulai && $data->tanggal_selesai)
+                      {{ \Carbon\Carbon::parse($data->tanggal_mulai)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($data->tanggal_selesai)->format('d-m-Y') }}
+                    @else
+                      -
+                    @endif
+                  </td>
+                  <td>
+                    @if($data->waktu_mulai && $data->waktu_selesai)
+                      {{ \Carbon\Carbon::createFromFormat('H:i:s', $data->waktu_mulai)->format('h:i A') }} - {{ \Carbon\Carbon::createFromFormat('H:i:s', $data->waktu_selesai)->format('h:i A') }}
+                    @else
+                      -
+                    @endif
+                  </td>
                   <td>
                     <span class="badge bg-{{ $data->status_persetujuan == 'Disetujui' ? 'success' : ($data->status_persetujuan == 'Tidak Disetujui' ? 'danger' : 'warning') }}">
                       {{ $data->status_persetujuan }}
@@ -193,6 +216,46 @@
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary"><i class="fas fa-save me-1"></i> Simpan</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit Profil -->
+<div class="modal fade" id="editProfilModal" tabindex="-1" aria-labelledby="editProfilModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="POST" action="{{ url('profil-user/update') }}" enctype="multipart/form-data">
+        @csrf
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="editProfilModalLabel"><i class="fas fa-user-edit me-2"></i>Edit Data Diri</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="edit_nama" class="form-label">Nama</label>
+            <input type="text" class="form-control" id="edit_nama" name="nama_user" value="{{ $user->nama_user ?? '' }}" required>
+          </div>
+          <div class="mb-3">
+            <label for="edit_email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="edit_email" name="email_user" value="{{ $user->email_user ?? '' }}" required>
+          </div>
+          <div class="mb-3">
+            <label for="edit_telepon" class="form-label">No Telepon</label>
+            <input type="text" class="form-control" id="edit_telepon" name="no_telepon" value="{{ $user->no_telepon ?? '' }}" required>
+          </div>
+          <div class="mb-3 text-center">
+            <img src="{{ $user->foto_user ? asset('uploads/foto-profil/'.$user->foto_user) : asset('img/default-avatar.png') }}" alt="Foto Profil" class="rounded-circle mb-2" style="width: 100px; height: 100px; object-fit: cover; border: 2px solid #ccc;">
+          </div>
+          <div class="mb-3">
+            <label for="edit_foto" class="form-label">Foto Profil (jpg/jpeg/png, max 5MB)</label>
+            <input type="file" class="form-control" id="edit_foto" name="foto_user" accept="image/jpeg,image/png,image/jpg">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
         </div>
       </form>
     </div>

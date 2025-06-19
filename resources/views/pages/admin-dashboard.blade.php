@@ -48,7 +48,7 @@
             <a class="nav-link active" href="{{ url('admin-dashboard') }}"><i class="fas fa-tachometer-alt me-1"></i> Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('approval') }}"><i class="fas fa-clipboard-check me-1"></i> Approval</a>
+            <a class="nav-link" href="{{ url('approval') }}"><i class="fas fa-clipboard-check me-1"></i> Persetujuan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('ruangan-admin') }}"><i class="fas fa-door-open me-1"></i> Ruangan</a>
@@ -82,7 +82,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between">
               <div>
-                <h5 class="card-title">Pending Approval</h5>
+                <h5 class="card-title">Persetujuan</h5>
                 <p class="card-text">Permintaan menunggu persetujuan</p>
               </div>
               <i class="fas fa-clock fa-3x text-warning"></i>
@@ -97,7 +97,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between">
               <div>
-                <h5 class="card-title">Total Ruangan</h5>
+                <h5 class="card-title">Ruangan</h5>
                 <p class="card-text">Ruangan tersedia</p>
               </div>
               <i class="fas fa-door-open fa-3x text-primary"></i>
@@ -114,7 +114,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between">
               <div>
-                <h5 class="card-title">Total User</h5>
+                <h5 class="card-title">User</h5>
                 <p class="card-text">Pengguna terdaftar</p>
               </div>
               <i class="fas fa-users fa-3x text-success"></i>

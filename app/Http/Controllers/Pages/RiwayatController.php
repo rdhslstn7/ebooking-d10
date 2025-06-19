@@ -20,7 +20,7 @@ class RiwayatController extends Controller
         $sort = $request->query('sort', 'desc');
         $query = \DB::table('tbl_peminjaman as p')
             ->join('tbl_ruangan as r', 'p.id_ruangan', '=', 'r.id_ruangan')
-            ->select('p.nama_kegiatan', 'p.organisasi', 'p.tanggal_peminjaman', 'p.waktu_peminjaman', 'p.status_persetujuan', 'r.id_ruangan', 'r.nama_ruangan', 'p.created_at')
+            ->select('p.nama_kegiatan', 'p.organisasi', 'p.tanggal_mulai', 'p.tanggal_selesai', 'p.waktu_mulai', 'p.waktu_selesai', 'p.status_persetujuan', 'r.id_ruangan', 'r.nama_ruangan', 'p.created_at')
             ->where('p.nim', $nim);
         if ($status && in_array($status, ['Disetujui', 'Menunggu', 'Tidak Disetujui'])) {
             $query->where('p.status_persetujuan', $status);
@@ -34,8 +34,8 @@ class RiwayatController extends Controller
                     'p.id_peminjaman',
                     'p.nama_kegiatan',
                     'p.organisasi',
-                    'p.tanggal_peminjaman',
-                    'p.waktu_peminjaman',
+                    'p.tanggal_mulai',
+                    'p.waktu_mulai',
                     'p.status_persetujuan',
                     'r.id_ruangan',
                     'r.nama_ruangan',

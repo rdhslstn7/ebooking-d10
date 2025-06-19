@@ -16,8 +16,8 @@ class ApprovalController extends Controller
             ->leftJoin('tbl_user as u', 'p.nim', '=', 'u.nim')
             ->select(
                 'p.id_peminjaman', 'p.nim', 'p.nama_peminjam', 'p.nama_kegiatan',
-                'p.organisasi', 'p.dokumen_pendukung', 'p.tanggal_peminjaman',
-                'p.waktu_peminjaman', 'p.id_ruangan', 'p.status_persetujuan',
+                'p.organisasi', 'p.dokumen_pendukung', 'p.tanggal_mulai', 'p.tanggal_selesai',
+                'p.waktu_mulai', 'p.waktu_selesai', 'p.id_ruangan', 'p.status_persetujuan',
                 'u.email_user', 'u.no_telepon', 'p.created_at'
             );
         if ($request->filled('status')) {

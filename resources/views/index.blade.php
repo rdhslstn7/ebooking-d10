@@ -13,6 +13,7 @@
     <!-- Our CSS -->
     <link rel="stylesheet" href="/css/index.css" />
     <title>E-Booking D10</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
   </head>
 
   <body id="home">
@@ -111,7 +112,7 @@
           <div class="col-md-6 about-text">
             <h2>Tentang E-Booking D10</h2>
             <p>
-              E-Booking D10 adalah aplikasi berbasis web untuk mempermudah pemesanan ruangan di Gedung D10. Pengguna cukup mengajukan permintaan jadwal, dan sistem akan memastikan tidak ada bentrok serta mengirimkan notifikasi otomatis.
+              E-Booking D10 adalah aplikasi berbasis web untuk mempermudah pemesanan ruangan di Gedung D10. Pengguna cukup mengajukan permintaan jadwal, dan sistem akan memastikan tidak ada bentrok serta mengirimkan notifikasi.
             </p>
           </div>
 
@@ -174,7 +175,7 @@
           </div>
           <!-- Ruangan 8 -->
           <div class="ruangan-item">
-            <img src="/img/lab jaringan.jpg" alt="Ruangan 8" />
+            <img src="/img/lab_jaringan.jpg" alt="Ruangan 8" />
             <h3>Lab Jaringan (D10.370B)</h3>
             <p>Ruang untuk praktik konfigurasi dan pengelolaan jaringan komputer dengan perangkat keras dan software pendukung.</p>
           </div>

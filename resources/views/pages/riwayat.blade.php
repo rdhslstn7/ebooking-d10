@@ -5,6 +5,7 @@
   <title>Riwayat Peminjaman Ruangan</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 </head>
 <body class="bg-light">
   <!-- Navbar -->
@@ -93,8 +94,8 @@
                   <td>{{ $data->nama_kegiatan }}</td>
                   <td>{{ $data->organisasi }}</td>
                   <td>{{ $data->nama_ruangan }} ({{ $data->id_ruangan }})</td>
-                  <td>{{ \Carbon\Carbon::parse($data->tanggal_peminjaman)->format('d-m-Y') }}</td>
-                  <td>{{ $data->waktu_peminjaman }}</td>
+                  <td>{{ \Carbon\Carbon::parse($data->tanggal_mulai)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($data->tanggal_selesai)->format('d-m-Y') }}</td>
+                  <td>{{ \Carbon\Carbon::createFromFormat('H:i:s', $data->waktu_mulai)->format('h:i A') }} - {{ \Carbon\Carbon::createFromFormat('H:i:s', $data->waktu_selesai)->format('h:i A') }}</td>
                   <td>
                     <span class="badge bg-{{ $data->status_persetujuan == 'Disetujui' ? 'success' : ($data->status_persetujuan == 'Ditolak' ? 'danger' : 'warning') }}">
                       {{ $data->status_persetujuan }}

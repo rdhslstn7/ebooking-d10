@@ -40,3 +40,5 @@ Route::post('/user-admin', [App\Http\Controllers\Pages\UserAdminController::clas
 Route::get('/user-admin/{id}/edit', [App\Http\Controllers\Pages\UserAdminController::class, 'edit']);
 Route::post('/user-admin/{id}/update', [App\Http\Controllers\Pages\UserAdminController::class, 'update']);
 Route::post('/user-admin/{id}/delete', [App\Http\Controllers\Pages\UserAdminController::class, 'destroy']);
+Route::get('/form-peminjaman/booked-times', [App\Http\Controllers\Pages\FormPeminjamanController::class, 'getBookedTimes']);
+Route::post('/profil-user/update', [App\Http\Controllers\Pages\ProfilUserController::class, 'update']);
