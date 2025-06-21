@@ -116,7 +116,7 @@ function loadNotifications() {
 }
 $(document).ready(function() {
   loadNotifications();
-  setInterval(loadNotifications, 10000); // per 10 detik
+  setInterval(loadNotifications, 5000); // per 5 detik
 });
 </script>
 </body>

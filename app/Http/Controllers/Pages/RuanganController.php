@@ -49,7 +49,7 @@ class RuanganController extends Controller
             \DB::table('tbl_peminjaman')
                 ->where('id_peminjaman', $request->query('id_peminjaman'))
                 ->update(['sudah_dibaca' => 1]);
-            return redirect('riwayat');
+            return redirect('profil-user');
         }
         $ruangan = \DB::table('tbl_ruangan')->get();
         return view('pages.ruangan', compact('nama_user', 'ruangan'));

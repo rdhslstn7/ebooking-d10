@@ -142,30 +142,60 @@
                 @endif
               </div>
             </div>
-            <ul class="list-unstyled mb-0 mt-2">
-              <li><strong>Ruangan:</strong> {{ $row->id_ruangan }}</li>
-              <li><strong>Tanggal:</strong> 
-                @if($row->tanggal_mulai && $row->tanggal_selesai)
-                  {{ \Carbon\Carbon::parse($row->tanggal_mulai)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($row->tanggal_selesai)->format('d-m-Y') }}
-                @else
-                  -
-                @endif
-              </li>
-              <li><strong>Waktu:</strong> 
-                @if($row->waktu_mulai && $row->waktu_selesai)
-                  {{ \Carbon\Carbon::createFromFormat('H:i:s', $row->waktu_mulai)->format('h:i A') }} - {{ \Carbon\Carbon::createFromFormat('H:i:s', $row->waktu_selesai)->format('h:i A') }}
-                @else
-                  -
-                @endif
-              </li>
-              <li><strong>Nama Peminjam:</strong> {{ $row->nama_peminjam }}</li>
-              <li><strong>NIM:</strong> {{ $row->nim }}</li>
-              <li><strong>Organisasi:</strong> {{ $row->organisasi }}</li>
-              <li><strong>No Telepon:</strong> {{ $row->no_telepon }}</li>
-              <li><strong>Email:</strong> {{ $row->email_user }}</li>
-              <li><strong>ID Peminjaman:</strong> {{ $row->id_peminjaman }}</li>
-              <li><strong>Dokumen:</strong> <a href="/uploads/{{ $row->dokumen_pendukung }}" target="_blank">{{ $row->dokumen_pendukung }}</a></li>
-            </ul>
+            <table class="table table-borderless mb-0" style="max-width:500px">
+              <tr>
+                <th class="ps-0" style="width: 160px;">Ruangan</th>
+                <td>: {{ $row->id_ruangan }}</td>
+              </tr>
+              <tr>
+                <th class="ps-0">Tanggal</th>
+                <td>:
+                  @if($row->tanggal_mulai && $row->tanggal_selesai)
+                    {{ \Carbon\Carbon::parse($row->tanggal_mulai)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($row->tanggal_selesai)->format('d-m-Y') }}
+                  @else
+                    -
+                  @endif
+                </td>
+              </tr>
+              <tr>
+                <th class="ps-0">Waktu</th>
+                <td>:
+                  @if($row->waktu_mulai && $row->waktu_selesai)
+                    {{ \Carbon\Carbon::createFromFormat('H:i:s', $row->waktu_mulai)->format('h:i A') }} - {{ \Carbon\Carbon::createFromFormat('H:i:s', $row->waktu_selesai)->format('h:i A') }}
+                  @else
+                    -
+                  @endif
+                </td>
+              </tr>
+              <tr>
+                <th class="ps-0">Nama Peminjam</th>
+                <td>: {{ $row->nama_peminjam }}</td>
+              </tr>
+              <tr>
+                <th class="ps-0">NIM</th>
+                <td>: {{ $row->nim }}</td>
+              </tr>
+              <tr>
+                <th class="ps-0">Organisasi</th>
+                <td>: {{ $row->organisasi }}</td>
+              </tr>
+              <tr>
+                <th class="ps-0">No Telepon</th>
+                <td>: {{ $row->no_telepon }}</td>
+              </tr>
+              <tr>
+                <th class="ps-0">Email</th>
+                <td>: {{ $row->email_user }}</td>
+              </tr>
+              <tr>
+                <th class="ps-0">ID Peminjaman</th>
+                <td>: {{ $row->id_peminjaman }}</td>
+              </tr>
+              <tr>
+                <th class="ps-0">Dokumen</th>
+                <td>: <a href="/uploads/{{ $row->dokumen_pendukung }}" target="_blank" class="link-primary fw-bold text-decoration-underline">Preview</a></td>
+              </tr>
+            </table>
           </div>
         </div>
       @endforeach
