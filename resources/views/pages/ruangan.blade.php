@@ -85,7 +85,7 @@
 <script>
 function loadNotifications() {
   $.ajax({
-    url: '{{ url('ruangan') }}?ajax=notif',
+    url: '/ruangan?ajax=notif',
     method: 'GET',
     dataType: 'json',
     success: function(data) {
